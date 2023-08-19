@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userLogout } from "../../redux/actions/authAction";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.user);
+  const user = localStorage.getItem("user");
+
   return (
     <>
       <nav className={styles.navBar}>
@@ -19,7 +20,7 @@ const Header = () => {
           </li>
         </ul>
         <ul className={styles.navList}>
-          {user?.isLoginIn ? (
+          {user ? (
             <>
               <li className={styles.navItem}>
                 <Link to="/home" className={styles.navLink}>
